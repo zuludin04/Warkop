@@ -1,0 +1,26 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+apply from: '../base.gradle'
+
+android {
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    dataBinding {
+        enabled true
+    }
+}
+
+dependencies {
+    implementation project(":detail")
+    implementation project(":home")
+    implementation project(":list")
+    implementation project(":navigation")
+    implementation project(":data")
+}

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.github.florent37.shapeofview.shapes.RoundRectView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="180dp"
+    android:layout_height="230dp"
+    app:shape_roundRect_bottomLeftRadius="5dp"
+    app:shape_roundRect_bottomRightRadius="5dp"
+    app:shape_roundRect_topLeftRadius="5dp"
+    app:shape_roundRect_topRightRadius="5dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:elevation="4dp">
+
+        <ImageView
+            android:id="@+id/city_image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:contentDescription="@null"
+            android:scaleType="centerCrop"
+            android:src="@drawable/landscape" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#50000000" />
+
+        <TextView
+            android:id="@+id/city_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="This is Text" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.github.florent37.shapeofview.shapes.RoundRectView>
