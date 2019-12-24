@@ -43,10 +43,14 @@ class CafeListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         val itemId = args.city
         val type = args.type
 
+        setupView()
+        loadData(type, itemId)
+    }
+
+    private fun setupView() {
         val cafeAdapter =
             CafeListAdapter(ArrayList()) { id, title ->
                 findNavController().navigate(
@@ -60,13 +64,9 @@ class CafeListFragment : Fragment() {
             setHasFixedSize(true)
             adapter = cafeAdapter
         }
+    }
 
-        viewModel.cafes.observe(this, Observer {
-            it?.let { cafes ->
-                cafeAdapter.addItems(cafes.data)
-            }
-        })
-
+    private fun loadData(type: String, itemId: String) {
         when (type) {
             "city" -> viewModel.loadCafes(itemId, "city", null)
             "category" -> viewModel.loadCafes(null, null, itemId)

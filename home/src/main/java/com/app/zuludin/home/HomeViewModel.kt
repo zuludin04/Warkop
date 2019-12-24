@@ -24,6 +24,9 @@ class HomeViewModel(
     val restaurant: LiveData<Resource<List<Any>>> get() = featuredRestaurant
     private var restaurantSource: LiveData<Resource<List<RestaurantsItem>>> = MutableLiveData()
 
+    private val statusLoading = MutableLiveData<Resource.Status>()
+    val loading: LiveData<Resource.Status> get() = statusLoading
+
     init {
         loadHomeFeatured()
     }
@@ -38,6 +41,7 @@ class HomeViewModel(
         featuredRestaurant.addSource(restaurantSource) {
             featuredRestaurant.value =
                 Resource.success(it.data?.let { restaurants -> addData(restaurants) })
+            statusLoading.value = it.status
             if (it.status == Resource.Status.ERROR) _snackBarError.value =
                 Event(it.error?.message.toString())
         }
