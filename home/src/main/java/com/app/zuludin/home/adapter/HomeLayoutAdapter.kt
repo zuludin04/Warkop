@@ -87,17 +87,14 @@ class MoreViewHolder(
         more: MoreData,
         listener: (city: City?, category: Categories?, restaurant: RestaurantsItem?) -> Unit
     ) {
-        val itemDecoration = if (more.isHorizontal) EqualSpacingItemDecoration(
-            12,
-            EqualSpacingItemDecoration.HORIZONTAL
-        ) else EqualSpacingItemDecoration(12, EqualSpacingItemDecoration.VERTICAL)
+        val itemDecoration = EqualSpacingItemDecoration(12, EqualSpacingItemDecoration.VERTICAL)
         itemView.recycler_more.apply {
             layoutManager = if (more.isHorizontal) LinearLayoutManager(
                 itemView.context,
                 LinearLayoutManager.HORIZONTAL,
                 false
             ) else LinearLayoutManager(itemView.context)
-            addItemDecoration(itemDecoration)
+            if (!more.isHorizontal) addItemDecoration(itemDecoration)
             setHasFixedSize(true)
             adapter = MoreAdapter(more.items, listener)
         }
