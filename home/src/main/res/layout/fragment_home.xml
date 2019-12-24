@@ -9,36 +9,25 @@
             type="com.app.zuludin.home.HomeViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        app:onRefreshListener="@{() -> viewModel.refreshLayout()}"
+        app:showProgress="@{viewModel.loading}">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/home_recycler"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:clipToPadding="false"
-            app:homeRecycler="@{viewModel.restaurant}" />
+            android:layout_height="match_parent">
 
-        <com.agrawalsuneet.squareloaderspack.loaders.WaveLoader
-            android:id="@+id/progress_bar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:showProgress="@{viewModel.loading}"
-            app:wave_animDuration="500"
-            app:wave_delayDuration="100"
-            app:wave_interpolator="@android:anim/linear_interpolator"
-            app:wave_isSingleColor="true"
-            app:wave_noOfDots="5"
-            app:wave_rectColor="#b52656"
-            app:wave_rectDistance="4dp"
-            app:wave_rectHeight="18dp"
-            app:wave_rectWidth="4dp" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/home_recycler"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipToPadding="false"
+                app:homeRecycler="@{viewModel.restaurant}" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 </layout>

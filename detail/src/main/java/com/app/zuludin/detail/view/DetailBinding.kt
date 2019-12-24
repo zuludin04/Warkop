@@ -1,16 +1,15 @@
 package com.app.zuludin.detail.view
 
-import android.view.View
 import androidx.databinding.BindingAdapter
-import com.agrawalsuneet.squareloaderspack.loaders.WaveLoader
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.app.zuludin.data.utils.Resource
 
 object DetailBinding {
     @BindingAdapter("app:showLoadingProgress")
     @JvmStatic
-    fun showLoadingProgress(view: WaveLoader, status: Resource.Status?) {
+    fun showLoadingProgress(view: SwipeRefreshLayout, status: Resource.Status?) {
         status?.let {
-            view.visibility = if (it == Resource.Status.LOADING) View.VISIBLE else View.GONE
+            view.isRefreshing = it == Resource.Status.LOADING
         }
     }
 }

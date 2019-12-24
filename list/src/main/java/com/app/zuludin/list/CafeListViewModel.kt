@@ -17,6 +17,10 @@ class CafeListViewModel(
     private val dispatchers: AppDispatchers
 ) : BaseViewModel() {
 
+    private lateinit var city: String
+    private lateinit var entity: String
+    private lateinit var category: String
+
     private val cafeListData = MediatorLiveData<Resource<List<RestaurantsItem>>>()
     val cafes: LiveData<Resource<List<RestaurantsItem>>> get() = cafeListData
     private var cafeSource: LiveData<Resource<List<RestaurantsItem>>> = MutableLiveData()
@@ -24,11 +28,20 @@ class CafeListViewModel(
     private val statusLoading = MutableLiveData<Resource.Status>()
     val loading: LiveData<Resource.Status> get() = statusLoading
 
-    fun loadCafes(cityId: String?, entityType: String?, categoryId: String?) = viewModelScope.launch(dispatchers.main) {
+    fun loadCafes(cityId: String?, entityType: String?, categoryId: String?) {
+        city = cityId.toString()
+        entity = entityType.toString()
+        category = categoryId.toString()
+        getRestaurantList()
+    }
+
+    fun refreshLayout() = getRestaurantList()
+
+    private fun getRestaurantList() = viewModelScope.launch(dispatchers.main) {
         cafeListData.removeSource(cafeSource)
 
         withContext(dispatchers.io) {
-            cafeSource = getCafeByCityUseCase(cityId, entityType, categoryId)
+            cafeSource = getCafeByCityUseCase(city, entity, category)
         }
 
         cafeListData.addSource(cafeSource) {

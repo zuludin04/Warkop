@@ -31,6 +31,8 @@ class HomeViewModel(
         loadHomeFeatured()
     }
 
+    fun refreshLayout() = loadHomeFeatured()
+
     private fun loadHomeFeatured() = viewModelScope.launch(dispatchers.main) {
         featuredRestaurant.removeSource(restaurantSource)
 

@@ -17,6 +17,8 @@ class CafeDetailViewModel(
     private val dispatchers: AppDispatchers
 ) : BaseViewModel() {
 
+    private lateinit var idCafe: String
+
     private var detailCafeSource: LiveData<Resource<DetailCafeResponse>> = MutableLiveData()
 
     private val detailCafeData = MediatorLiveData<DetailCafeResponse>()
@@ -26,11 +28,18 @@ class CafeDetailViewModel(
     val loading: LiveData<Resource.Status> get() = loadingStatus
 
 
-    fun loadCafeDetail(cafeId: String) = viewModelScope.launch(dispatchers.main) {
+    fun loadCafeDetail(cafeId: String) {
+        idCafe = cafeId
+        getDetailData()
+    }
+
+    fun refreshDetailLayout() = getDetailData()
+
+    private fun getDetailData() = viewModelScope.launch(dispatchers.main) {
         detailCafeData.removeSource(detailCafeSource)
 
         withContext(dispatchers.io) {
-            detailCafeSource = getDetailCafeUseCase(cafeId)
+            detailCafeSource = getDetailCafeUseCase(idCafe)
         }
 
         detailCafeData.addSource(detailCafeSource) {
