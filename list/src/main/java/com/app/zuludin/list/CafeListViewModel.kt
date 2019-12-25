@@ -28,6 +28,9 @@ class CafeListViewModel(
     private val statusLoading = MutableLiveData<Resource.Status>()
     val loading: LiveData<Resource.Status> get() = statusLoading
 
+    private val errorLayout = MutableLiveData<Boolean>()
+    val error: LiveData<Boolean> get() = errorLayout
+
     fun loadCafes(cityId: String?, entityType: String?, categoryId: String?) {
         city = cityId.toString()
         entity = entityType.toString()
@@ -47,6 +50,7 @@ class CafeListViewModel(
         cafeListData.addSource(cafeSource) {
             cafeListData.value = it
             statusLoading.value = it.status
+            errorLayout.value = it.status == Resource.Status.ERROR
             if (it.status == Resource.Status.ERROR) _snackBarError.value =
                 Event(it.error?.message.toString())
         }

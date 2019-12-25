@@ -5,6 +5,8 @@
 
     <data>
 
+        <import type="android.view.View" />
+
         <variable
             name="viewModel"
             type="com.app.zuludin.list.CafeListViewModel" />
@@ -26,9 +28,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:clipToPadding="false"
+                android:visibility="@{viewModel.error ? View.GONE : View.VISIBLE}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:recyclerRestaurant="@{viewModel.cafes}" />
+
+            <include
+                android:id="@+id/error_timeout_layout"
+                layout="@layout/error_timeout_layout"
+                android:visibility="@{viewModel.error ? View.VISIBLE : View.GONE}" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

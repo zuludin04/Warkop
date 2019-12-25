@@ -4,6 +4,8 @@
 
     <data>
 
+        <import type="android.view.View" />
+
         <variable
             name="viewModel"
             type="com.app.zuludin.home.HomeViewModel" />
@@ -24,7 +26,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:clipToPadding="false"
+                android:visibility="@{viewModel.error ? View.GONE : View.VISIBLE}"
                 app:homeRecycler="@{viewModel.restaurant}" />
+
+            <include
+                android:id="@+id/error_layout"
+                layout="@layout/timeout_layout"
+                android:visibility="@{viewModel.error ? View.VISIBLE : View.GONE}" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

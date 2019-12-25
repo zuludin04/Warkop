@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">common</string>
     <string name="cafe_location">%s, %s</string>
+
+    <string name="sorry">We\'re Sorry</string>
+    <string name="something_wrong">There is something wrong. \n Check your connection and refresh the page</string>
+    <string name="try_again">Try Again</string>
 </resources>

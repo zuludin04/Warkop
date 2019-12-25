@@ -18,7 +18,6 @@
         app:onRefreshListener="@{() -> viewModel.refreshDetailLayout()}"
         app:showLoadingProgress="@{viewModel.loading}">
 
-
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -34,6 +33,7 @@
                     android:layout_height="250dp"
                     android:contentDescription="@null"
                     android:scaleType="fitXY"
+                    android:visibility="@{viewModel.error ? View.GONE : View.VISIBLE}"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
@@ -48,6 +48,7 @@
                     android:padding="8dp"
                     android:text="@{viewModel.cafe.userRating.aggregateRating}"
                     android:textColor="@android:color/white"
+                    android:visibility="@{viewModel.error ? View.GONE : View.VISIBLE}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:ignore="UnusedAttribute" />
@@ -88,6 +89,7 @@
                     android:textColor="@android:color/black"
                     android:textSize="15sp"
                     android:textStyle="bold"
+                    android:visibility="@{viewModel.error ? View.GONE : View.VISIBLE}"
                     app:layout_constraintEnd_toStartOf="@+id/guideline"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/divider" />
@@ -113,6 +115,7 @@
                     android:textColor="@android:color/black"
                     android:textSize="15sp"
                     android:textStyle="bold"
+                    android:visibility="@{viewModel.error ? View.GONE : View.VISIBLE}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/guideline"
                     app:layout_constraintTop_toBottomOf="@+id/divider" />
@@ -124,6 +127,7 @@
                     android:layout_marginTop="4dp"
                     android:gravity="center"
                     android:text="@{String.valueOf(viewModel.cafe.averageCostForTwo)}"
+                    android:visibility="@{viewModel.error ? View.GONE : View.VISIBLE}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/guideline"
                     app:layout_constraintTop_toBottomOf="@+id/average" />
@@ -138,6 +142,7 @@
                     android:textColor="@android:color/black"
                     android:textSize="15sp"
                     android:textStyle="bold"
+                    android:visibility="@{viewModel.error ? View.GONE : View.VISIBLE}"
                     app:layout_constraintEnd_toStartOf="@+id/guideline"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/detail_cafe_currency" />
@@ -165,6 +170,7 @@
                     android:textColor="@android:color/black"
                     android:textSize="15sp"
                     android:textStyle="bold"
+                    android:visibility="@{viewModel.error ? View.GONE : View.VISIBLE}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/guideline"
                     app:layout_constraintTop_toBottomOf="@+id/detail_cafe_average" />
@@ -193,6 +199,7 @@
                     android:textColor="@android:color/black"
                     android:textSize="15sp"
                     android:textStyle="bold"
+                    android:visibility="@{viewModel.error ? View.GONE : View.VISIBLE}"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/divider_two" />
 
@@ -200,6 +207,7 @@
                     android:id="@+id/detail_cafe_slide"
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
+                    android:visibility="@{viewModel.error ? View.GONE : View.VISIBLE}"
                     app:layout_constraintTop_toBottomOf="@+id/photos" />
 
                 <TextView
@@ -212,6 +220,7 @@
                     android:textColor="@android:color/black"
                     android:textSize="15sp"
                     android:textStyle="bold"
+                    android:visibility="@{viewModel.error ? View.GONE : View.VISIBLE}"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/detail_cafe_slide" />
 
@@ -220,6 +229,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:clipToPadding="false"
+                    android:visibility="@{viewModel.error ? View.GONE : View.VISIBLE}"
                     app:layout_constraintTop_toBottomOf="@+id/more" />
 
                 <TextView
@@ -232,6 +242,7 @@
                     android:gravity="center"
                     android:text="@string/map"
                     android:textSize="12sp"
+                    android:visibility="@{viewModel.error ? View.GONE : View.VISIBLE}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/detail_cafe_address" />
@@ -246,6 +257,7 @@
                     android:gravity="center"
                     android:text="@string/menu"
                     android:textSize="12sp"
+                    android:visibility="@{viewModel.error ? View.GONE : View.VISIBLE}"
                     app:layout_constraintEnd_toStartOf="@+id/detail_cafe_map"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/detail_cafe_address" />
@@ -260,6 +272,7 @@
                     android:gravity="center"
                     android:text="@string/phone"
                     android:textSize="12sp"
+                    android:visibility="@{viewModel.error ? View.GONE : View.VISIBLE}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/detail_cafe_map"
                     app:layout_constraintTop_toBottomOf="@+id/detail_cafe_address" />
@@ -271,6 +284,7 @@
                     android:layout_marginTop="16dp"
                     android:alpha=".3"
                     android:background="@android:color/darker_gray"
+                    android:visibility="@{viewModel.error ? View.GONE : View.VISIBLE}"
                     app:layout_constraintTop_toBottomOf="@+id/detail_cafe_map" />
 
                 <View
@@ -280,6 +294,7 @@
                     android:layout_marginTop="8dp"
                     android:alpha=".3"
                     android:background="@android:color/darker_gray"
+                    android:visibility="@{viewModel.error ? View.GONE : View.VISIBLE}"
                     app:layout_constraintTop_toBottomOf="@+id/detail_cafe_time" />
 
                 <androidx.constraintlayout.widget.Guideline
@@ -288,6 +303,11 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     app:layout_constraintGuide_begin="205dp" />
+
+                <include
+                    android:id="@+id/timeout_layout"
+                    layout="@layout/error_layout"
+                    android:visibility="@{viewModel.error ? View.VISIBLE : View.GONE}" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

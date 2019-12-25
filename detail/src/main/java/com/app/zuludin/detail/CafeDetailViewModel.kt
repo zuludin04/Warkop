@@ -27,6 +27,8 @@ class CafeDetailViewModel(
     private val loadingStatus = MutableLiveData<Resource.Status>()
     val loading: LiveData<Resource.Status> get() = loadingStatus
 
+    private val errorLayout = MutableLiveData<Boolean>()
+    val error: LiveData<Boolean> get() = errorLayout
 
     fun loadCafeDetail(cafeId: String) {
         idCafe = cafeId
@@ -45,6 +47,7 @@ class CafeDetailViewModel(
         detailCafeData.addSource(detailCafeSource) {
             detailCafeData.value = it.data
             loadingStatus.value = it.status
+            errorLayout.value = it.status == Resource.Status.ERROR
             if (it.status == Resource.Status.ERROR) _snackBarError.value =
                 Event(it.error?.message.toString())
         }
