@@ -42,6 +42,7 @@ class CafeDetailFragment : Fragment() {
             DataBindingUtil.inflate(inflater, R.layout.fragment_cafe_detail, container, false)
 
         dataBinding.viewModel = viewModel
+        dataBinding.timeoutLayout.viewModel = viewModel
         dataBinding.lifecycleOwner = viewLifecycleOwner
 
         return dataBinding.root

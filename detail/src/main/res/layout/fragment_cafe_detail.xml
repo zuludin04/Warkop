@@ -12,307 +12,318 @@
             type="com.app.zuludin.detail.CafeDetailViewModel" />
     </data>
 
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:onRefreshListener="@{() -> viewModel.refreshDetailLayout()}"
-        app:showLoadingProgress="@{viewModel.loading}">
+        tools:context=".CafeDetailFragment">
 
-        <androidx.core.widget.NestedScrollView
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:context=".CafeDetailFragment">
+            android:layout_height="match_parent">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <ImageView
+                android:id="@+id/detail_cafe_image"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="250dp"
+                android:contentDescription="@null"
+                android:scaleType="fitXY"
+                android:visibility="@{viewModel.error ? View.GONE : View.VISIBLE}"
+                app:layout_constraintTop_toTopOf="parent" />
 
-                <ImageView
-                    android:id="@+id/detail_cafe_image"
-                    android:layout_width="match_parent"
-                    android:layout_height="250dp"
-                    android:contentDescription="@null"
-                    android:scaleType="fitXY"
-                    android:visibility="@{viewModel.error ? View.GONE : View.VISIBLE}"
-                    app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                android:id="@+id/detail_cafe_rating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#65000000"
+                android:drawableStart="@drawable/ic_rating"
+                android:drawablePadding="4dp"
+                android:drawableTint="@android:color/white"
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="@{viewModel.cafe.userRating.aggregateRating}"
+                android:textColor="@android:color/white"
+                android:visibility="@{viewModel.error ? View.GONE : View.VISIBLE}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="UnusedAttribute" />
 
-                <TextView
-                    android:id="@+id/detail_cafe_rating"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="#65000000"
-                    android:drawableStart="@drawable/ic_rating"
-                    android:drawablePadding="4dp"
-                    android:drawableTint="@android:color/white"
-                    android:gravity="center"
-                    android:padding="8dp"
-                    android:text="@{viewModel.cafe.userRating.aggregateRating}"
-                    android:textColor="@android:color/white"
-                    android:visibility="@{viewModel.error ? View.GONE : View.VISIBLE}"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:ignore="UnusedAttribute" />
+            <TextView
+                android:id="@+id/detail_cafe_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:padding="8dp"
+                android:text="@{viewModel.cafe.name}"
+                android:textColor="@android:color/black"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/detail_cafe_image" />
 
-                <TextView
-                    android:id="@+id/detail_cafe_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:padding="8dp"
-                    android:text="@{viewModel.cafe.name}"
-                    android:textColor="@android:color/black"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/detail_cafe_image" />
+            <TextView
+                android:id="@+id/detail_cafe_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:text="@{viewModel.cafe.location.address}"
+                android:textColor="#555"
+                android:textSize="13sp"
+                app:layout_constraintTop_toBottomOf="@+id/detail_cafe_name" />
 
-                <TextView
-                    android:id="@+id/detail_cafe_address"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:paddingStart="8dp"
-                    android:paddingEnd="8dp"
-                    android:text="@{viewModel.cafe.location.address}"
-                    android:textColor="#555"
-                    android:textSize="13sp"
-                    app:layout_constraintTop_toBottomOf="@+id/detail_cafe_name" />
+            <TextView
+                android:id="@+id/currency"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:gravity="center"
+                android:text="@string/currency"
+                android:textColor="@android:color/black"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:visibility="@{viewModel.error ? View.GONE : View.VISIBLE}"
+                app:layout_constraintEnd_toStartOf="@+id/guideline"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/divider" />
 
-                <TextView
-                    android:id="@+id/currency"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:gravity="center"
-                    android:text="@string/currency"
-                    android:textColor="@android:color/black"
-                    android:textSize="15sp"
-                    android:textStyle="bold"
-                    android:visibility="@{viewModel.error ? View.GONE : View.VISIBLE}"
-                    app:layout_constraintEnd_toStartOf="@+id/guideline"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/divider" />
+            <TextView
+                android:id="@+id/detail_cafe_currency"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:gravity="center"
+                android:text="@{viewModel.cafe.currency}"
+                app:layout_constraintEnd_toStartOf="@+id/guideline"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/currency" />
 
-                <TextView
-                    android:id="@+id/detail_cafe_currency"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:gravity="center"
-                    android:text="@{viewModel.cafe.currency}"
-                    app:layout_constraintEnd_toStartOf="@+id/guideline"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/currency" />
+            <TextView
+                android:id="@+id/average"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:gravity="center"
+                android:text="@string/average_cost"
+                android:textColor="@android:color/black"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:visibility="@{viewModel.error ? View.GONE : View.VISIBLE}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/guideline"
+                app:layout_constraintTop_toBottomOf="@+id/divider" />
 
-                <TextView
-                    android:id="@+id/average"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:gravity="center"
-                    android:text="@string/average_cost"
-                    android:textColor="@android:color/black"
-                    android:textSize="15sp"
-                    android:textStyle="bold"
-                    android:visibility="@{viewModel.error ? View.GONE : View.VISIBLE}"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/guideline"
-                    app:layout_constraintTop_toBottomOf="@+id/divider" />
+            <TextView
+                android:id="@+id/detail_cafe_average"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:gravity="center"
+                android:text="@{String.valueOf(viewModel.cafe.averageCostForTwo)}"
+                android:visibility="@{viewModel.error ? View.GONE : View.VISIBLE}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/guideline"
+                app:layout_constraintTop_toBottomOf="@+id/average" />
 
-                <TextView
-                    android:id="@+id/detail_cafe_average"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:gravity="center"
-                    android:text="@{String.valueOf(viewModel.cafe.averageCostForTwo)}"
-                    android:visibility="@{viewModel.error ? View.GONE : View.VISIBLE}"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/guideline"
-                    app:layout_constraintTop_toBottomOf="@+id/average" />
+            <TextView
+                android:id="@+id/time"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:gravity="center"
+                android:text="@string/time"
+                android:textColor="@android:color/black"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:visibility="@{viewModel.error ? View.GONE : View.VISIBLE}"
+                app:layout_constraintEnd_toStartOf="@+id/guideline"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/detail_cafe_currency" />
 
-                <TextView
-                    android:id="@+id/time"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    android:gravity="center"
-                    android:text="@string/time"
-                    android:textColor="@android:color/black"
-                    android:textSize="15sp"
-                    android:textStyle="bold"
-                    android:visibility="@{viewModel.error ? View.GONE : View.VISIBLE}"
-                    app:layout_constraintEnd_toStartOf="@+id/guideline"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/detail_cafe_currency" />
+            <TextView
+                android:id="@+id/detail_cafe_time"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:gravity="center"
+                android:paddingStart="8dp"
+                android:paddingEnd="4dp"
+                android:text="@{viewModel.cafe.timings}"
+                app:layout_constraintEnd_toStartOf="@+id/guideline"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/time" />
 
-                <TextView
-                    android:id="@+id/detail_cafe_time"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:gravity="center"
-                    android:paddingStart="8dp"
-                    android:paddingEnd="4dp"
-                    android:text="@{viewModel.cafe.timings}"
-                    app:layout_constraintEnd_toStartOf="@+id/guideline"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/time" />
+            <TextView
+                android:id="@+id/cuisine"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:gravity="center"
+                android:text="@string/cuisine"
+                android:textColor="@android:color/black"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:visibility="@{viewModel.error ? View.GONE : View.VISIBLE}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/guideline"
+                app:layout_constraintTop_toBottomOf="@+id/detail_cafe_average" />
 
-                <TextView
-                    android:id="@+id/cuisine"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    android:gravity="center"
-                    android:text="@string/cuisine"
-                    android:textColor="@android:color/black"
-                    android:textSize="15sp"
-                    android:textStyle="bold"
-                    android:visibility="@{viewModel.error ? View.GONE : View.VISIBLE}"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/guideline"
-                    app:layout_constraintTop_toBottomOf="@+id/detail_cafe_average" />
+            <TextView
+                android:id="@+id/detail_cafe_cuisine"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:gravity="center"
+                android:paddingStart="4dp"
+                android:paddingEnd="8dp"
+                android:text="@{viewModel.cafe.cuisines}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/guideline"
+                app:layout_constraintTop_toBottomOf="@+id/cuisine" />
 
-                <TextView
-                    android:id="@+id/detail_cafe_cuisine"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:gravity="center"
-                    android:paddingStart="4dp"
-                    android:paddingEnd="8dp"
-                    android:text="@{viewModel.cafe.cuisines}"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/guideline"
-                    app:layout_constraintTop_toBottomOf="@+id/cuisine" />
+            <TextView
+                android:id="@+id/photos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:gravity="center"
+                android:text="@string/photos"
+                android:textColor="@android:color/black"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:visibility="@{viewModel.error ? View.GONE : View.VISIBLE}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/divider_two" />
 
-                <TextView
-                    android:id="@+id/photos"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:gravity="center"
-                    android:text="@string/photos"
-                    android:textColor="@android:color/black"
-                    android:textSize="15sp"
-                    android:textStyle="bold"
-                    android:visibility="@{viewModel.error ? View.GONE : View.VISIBLE}"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/divider_two" />
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/detail_cafe_slide"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:visibility="@{viewModel.error ? View.GONE : View.VISIBLE}"
+                app:layout_constraintTop_toBottomOf="@+id/photos" />
 
-                <androidx.viewpager.widget.ViewPager
-                    android:id="@+id/detail_cafe_slide"
-                    android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    android:visibility="@{viewModel.error ? View.GONE : View.VISIBLE}"
-                    app:layout_constraintTop_toBottomOf="@+id/photos" />
+            <TextView
+                android:id="@+id/more"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:gravity="center"
+                android:text="@string/more_info"
+                android:textColor="@android:color/black"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:visibility="@{viewModel.error ? View.GONE : View.VISIBLE}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/detail_cafe_slide" />
 
-                <TextView
-                    android:id="@+id/more"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:gravity="center"
-                    android:text="@string/more_info"
-                    android:textColor="@android:color/black"
-                    android:textSize="15sp"
-                    android:textStyle="bold"
-                    android:visibility="@{viewModel.error ? View.GONE : View.VISIBLE}"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/detail_cafe_slide" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_more"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clipToPadding="false"
+                android:visibility="@{viewModel.error ? View.GONE : View.VISIBLE}"
+                app:layout_constraintTop_toBottomOf="@+id/more" />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recycler_more"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:clipToPadding="false"
-                    android:visibility="@{viewModel.error ? View.GONE : View.VISIBLE}"
-                    app:layout_constraintTop_toBottomOf="@+id/more" />
+            <TextView
+                android:id="@+id/detail_cafe_map"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:drawableTop="@drawable/ic_map"
+                android:drawablePadding="4dp"
+                android:gravity="center"
+                android:text="@string/map"
+                android:textSize="12sp"
+                android:visibility="@{viewModel.error ? View.GONE : View.VISIBLE}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/detail_cafe_address" />
 
-                <TextView
-                    android:id="@+id/detail_cafe_map"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:drawableTop="@drawable/ic_map"
-                    android:drawablePadding="4dp"
-                    android:gravity="center"
-                    android:text="@string/map"
-                    android:textSize="12sp"
-                    android:visibility="@{viewModel.error ? View.GONE : View.VISIBLE}"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/detail_cafe_address" />
+            <TextView
+                android:id="@+id/detail_cafe_menu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:drawableTop="@drawable/ic_menu"
+                android:drawablePadding="4dp"
+                android:gravity="center"
+                android:text="@string/menu"
+                android:textSize="12sp"
+                android:visibility="@{viewModel.error ? View.GONE : View.VISIBLE}"
+                app:layout_constraintEnd_toStartOf="@+id/detail_cafe_map"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/detail_cafe_address" />
 
-                <TextView
-                    android:id="@+id/detail_cafe_menu"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:drawableTop="@drawable/ic_menu"
-                    android:drawablePadding="4dp"
-                    android:gravity="center"
-                    android:text="@string/menu"
-                    android:textSize="12sp"
-                    android:visibility="@{viewModel.error ? View.GONE : View.VISIBLE}"
-                    app:layout_constraintEnd_toStartOf="@+id/detail_cafe_map"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/detail_cafe_address" />
+            <TextView
+                android:id="@+id/detail_cafe_phone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:drawableTop="@drawable/ic_phone"
+                android:drawablePadding="4dp"
+                android:gravity="center"
+                android:text="@string/phone"
+                android:textSize="12sp"
+                android:visibility="@{viewModel.error ? View.GONE : View.VISIBLE}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/detail_cafe_map"
+                app:layout_constraintTop_toBottomOf="@+id/detail_cafe_address" />
 
-                <TextView
-                    android:id="@+id/detail_cafe_phone"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:drawableTop="@drawable/ic_phone"
-                    android:drawablePadding="4dp"
-                    android:gravity="center"
-                    android:text="@string/phone"
-                    android:textSize="12sp"
-                    android:visibility="@{viewModel.error ? View.GONE : View.VISIBLE}"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/detail_cafe_map"
-                    app:layout_constraintTop_toBottomOf="@+id/detail_cafe_address" />
+            <View
+                android:id="@+id/divider"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="16dp"
+                android:alpha=".3"
+                android:background="@android:color/darker_gray"
+                android:visibility="@{viewModel.error ? View.GONE : View.VISIBLE}"
+                app:layout_constraintTop_toBottomOf="@+id/detail_cafe_map" />
 
-                <View
-                    android:id="@+id/divider"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="16dp"
-                    android:alpha=".3"
-                    android:background="@android:color/darker_gray"
-                    android:visibility="@{viewModel.error ? View.GONE : View.VISIBLE}"
-                    app:layout_constraintTop_toBottomOf="@+id/detail_cafe_map" />
+            <View
+                android:id="@+id/divider_two"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="8dp"
+                android:alpha=".3"
+                android:background="@android:color/darker_gray"
+                android:visibility="@{viewModel.error ? View.GONE : View.VISIBLE}"
+                app:layout_constraintTop_toBottomOf="@+id/detail_cafe_time" />
 
-                <View
-                    android:id="@+id/divider_two"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="8dp"
-                    android:alpha=".3"
-                    android:background="@android:color/darker_gray"
-                    android:visibility="@{viewModel.error ? View.GONE : View.VISIBLE}"
-                    app:layout_constraintTop_toBottomOf="@+id/detail_cafe_time" />
+            <com.agrawalsuneet.squareloaderspack.loaders.WaveLoader
+                android:id="@+id/progress_bar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:showLoadingProgress="@{viewModel.loading}"
+                app:wave_animDuration="500"
+                app:wave_delayDuration="100"
+                app:wave_interpolator="@android:anim/linear_interpolator"
+                app:wave_isSingleColor="true"
+                app:wave_noOfDots="5"
+                app:wave_rectColor="#b52656"
+                app:wave_rectDistance="4dp"
+                app:wave_rectHeight="18dp"
+                app:wave_rectWidth="4dp" />
 
-                <androidx.constraintlayout.widget.Guideline
-                    android:id="@+id/guideline"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    app:layout_constraintGuide_begin="205dp" />
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="205dp" />
 
-                <include
-                    android:id="@+id/timeout_layout"
-                    layout="@layout/error_layout"
-                    android:visibility="@{viewModel.error ? View.VISIBLE : View.GONE}" />
+            <include
+                android:id="@+id/timeout_layout"
+                layout="@layout/error_layout"
+                android:visibility="@{viewModel.error ? View.VISIBLE : View.GONE}" />
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-        </androidx.core.widget.NestedScrollView>
-
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+    </androidx.core.widget.NestedScrollView>
 
 </layout>
