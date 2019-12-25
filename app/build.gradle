@@ -22,5 +22,6 @@ dependencies {
     implementation project(":home")
     implementation project(":list")
     implementation project(":navigation")
+    implementation project(":search")
     implementation project(":data")
 }

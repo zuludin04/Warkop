@@ -15,6 +15,10 @@
         <action
             android:id="@+id/actionStraightToDetail"
             app:destination="@id/cafeDetailFragment" />
+
+        <action
+            android:id="@+id/actionToSearchPage"
+            app:destination="@id/searchFragment" />
     </fragment>
 
     <fragment
@@ -47,7 +51,11 @@
 
         <argument
             android:name="detailTitle"
-            app:argType="string"/>
+            app:argType="string" />
     </fragment>
+
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.app.zuludin.search.SearchFragment" />
 
 </navigation>

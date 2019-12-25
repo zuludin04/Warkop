@@ -1,2 +1,2 @@
-include ':app', ':home', ':detail', ':list', ':data', ':navigation', ':common'
+include ':app', ':home', ':detail', ':list', ':data', ':navigation', ':common', ':search'
 rootProject.name='Warkop'
