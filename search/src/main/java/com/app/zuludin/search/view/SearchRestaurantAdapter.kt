@@ -30,6 +30,7 @@ class SearchRestaurantAdapter(
     }
 
     fun addItems(list: List<RestaurantsItem>) {
+        items.clear()
         items.addAll(list)
         notifyDataSetChanged()
     }
