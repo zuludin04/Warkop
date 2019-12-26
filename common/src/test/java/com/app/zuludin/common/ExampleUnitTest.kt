@@ -1,4 +1,4 @@
-package com.app.zuludin.warkop
+package com.app.zuludin.common
 
 import org.junit.Test
 
