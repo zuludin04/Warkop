@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.app.zuludin.common.BaseViewModel
+import com.app.zuludin.common.base.BaseViewModel
 import com.app.zuludin.common.Event
 import com.app.zuludin.data.AppDispatchers
 import com.app.zuludin.data.model.RestaurantsItem

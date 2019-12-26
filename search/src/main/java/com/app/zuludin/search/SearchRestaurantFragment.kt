@@ -6,9 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.app.zuludin.common.base.BaseFragment
+import com.app.zuludin.common.base.BaseViewModel
 import com.app.zuludin.common.EqualSpacingItemDecoration
 import com.app.zuludin.search.databinding.FragmentSearchBinding
 import com.app.zuludin.search.navigation.SearchRestaurantNavigation
@@ -16,7 +17,7 @@ import com.app.zuludin.search.view.SearchRestaurantAdapter
 import kotlinx.android.synthetic.main.fragment_search.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class SearchFragment : Fragment() {
+class SearchRestaurantFragment : BaseFragment() {
 
     private lateinit var dataBinding: FragmentSearchBinding
     private val viewModel: SearchRestaurantViewModel by viewModel()
@@ -43,6 +44,8 @@ class SearchFragment : Fragment() {
         setupRecycler()
         searchRestaurant()
     }
+
+    override fun getViewModel(): BaseViewModel = viewModel
 
     private fun setupRecycler() {
         val searchAdapter = SearchRestaurantAdapter(ArrayList()) {

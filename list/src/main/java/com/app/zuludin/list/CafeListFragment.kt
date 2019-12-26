@@ -6,10 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.app.zuludin.common.base.BaseFragment
+import com.app.zuludin.common.base.BaseViewModel
 import com.app.zuludin.common.EqualSpacingItemDecoration
 import com.app.zuludin.common.EqualSpacingItemDecoration.Companion.VERTICAL
 import com.app.zuludin.list.adapter.CafeListAdapter
@@ -21,7 +22,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 /**
  * A simple [Fragment] subclass.
  */
-class CafeListFragment : Fragment() {
+class CafeListFragment : BaseFragment() {
 
     private val args: CafeListFragmentArgs by navArgs()
     private val viewModel: CafeListViewModel by viewModel()
@@ -50,6 +51,8 @@ class CafeListFragment : Fragment() {
         setupView()
         loadData(type, itemId)
     }
+
+    override fun getViewModel(): BaseViewModel = viewModel
 
     private fun setupView() {
         val cafeAdapter =

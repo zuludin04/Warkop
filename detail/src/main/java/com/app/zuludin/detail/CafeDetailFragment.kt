@@ -15,6 +15,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
+import com.app.zuludin.common.base.BaseFragment
+import com.app.zuludin.common.base.BaseViewModel
 import com.app.zuludin.common.loadUrlImage
 import com.app.zuludin.detail.adapter.CafeSlideAdapter
 import com.app.zuludin.detail.adapter.FacilityAdapter
@@ -27,7 +29,7 @@ import kotlin.collections.ArrayList
 /**
  * A simple [Fragment] subclass.
  */
-class CafeDetailFragment : Fragment() {
+class CafeDetailFragment : BaseFragment() {
 
     private val args: CafeDetailFragmentArgs by navArgs()
     private val viewModel: CafeDetailViewModel by viewModel()
@@ -73,6 +75,8 @@ class CafeDetailFragment : Fragment() {
 
         viewModel.loadCafeDetail(cafe)
     }
+
+    override fun getViewModel(): BaseViewModel = viewModel
 
     private fun changeRatingColor(textView: TextView, color: String) {
         textView.setTextColor(Color.parseColor("#$color"))

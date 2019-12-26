@@ -6,6 +6,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.app.zuludin.common.base.BaseFragment
+import com.app.zuludin.common.base.BaseViewModel
 import com.app.zuludin.common.EqualSpacingItemDecoration
 import com.app.zuludin.home.adapter.HomeLayoutAdapter
 import com.app.zuludin.home.databinding.FragmentHomeBinding
@@ -16,7 +18,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 /**
  * A simple [Fragment] subclass.
  */
-class HomeFragment : Fragment() {
+class HomeFragment : BaseFragment() {
 
     private val viewModel: HomeViewModel by viewModel()
     private lateinit var dataBinding: FragmentHomeBinding
@@ -56,6 +58,8 @@ class HomeFragment : Fragment() {
         }
         return super.onOptionsItemSelected(item)
     }
+
+    override fun getViewModel(): BaseViewModel = viewModel
 
     private fun setupView() {
         val homeAdapter = HomeLayoutAdapter(ArrayList()) { city, category, restaurant ->
