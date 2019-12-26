@@ -56,6 +56,12 @@
 
     <fragment
         android:id="@+id/searchFragment"
-        android:name="com.app.zuludin.search.SearchFragment" />
+        android:name="com.app.zuludin.search.SearchFragment">
+
+        <action
+            android:id="@+id/detailFromSearch"
+            app:destination="@id/cafeDetailFragment" />
+
+    </fragment>
 
 </navigation>

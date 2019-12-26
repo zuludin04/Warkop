@@ -6,6 +6,7 @@ import com.app.zuludin.data.di.repositoryModule
 import com.app.zuludin.detail.di.cafeDetailModule
 import com.app.zuludin.home.di.homeModule
 import com.app.zuludin.list.di.cafeListModule
+import com.app.zuludin.search.di.searchModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
@@ -18,6 +19,6 @@ open class App : Application() {
     open fun configureDI() = startKoin {
         androidContext(this@App)
         modules(listOf(dataModule, repositoryModule,
-            homeModule, cafeListModule, cafeDetailModule))
+            homeModule, cafeListModule, cafeDetailModule, searchModule))
     }
 }

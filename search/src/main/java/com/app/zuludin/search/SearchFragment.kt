@@ -4,24 +4,73 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.SearchView
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.app.zuludin.common.EqualSpacingItemDecoration
+import com.app.zuludin.search.databinding.FragmentSearchBinding
+import com.app.zuludin.search.navigation.SearchRestaurantNavigation
+import com.app.zuludin.search.view.SearchRestaurantAdapter
 import kotlinx.android.synthetic.main.fragment_search.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SearchFragment : Fragment() {
+
+    private lateinit var dataBinding: FragmentSearchBinding
+    private val viewModel: SearchRestaurantViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_search, container, false)
+        dataBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_search, container, false)
+
+        dataBinding.viewModel = viewModel
+        dataBinding.lifecycleOwner = viewLifecycleOwner
+
+        return dataBinding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        search.setIconifiedByDefault(false)
-        search.queryHint = "Search"
+        dataBinding.search.setIconifiedByDefault(false)
+        dataBinding.search.queryHint = "Search"
 
         back_button.setOnClickListener { findNavController().popBackStack() }
+
+        setupRecycler()
+        searchRestaurant()
+    }
+
+    private fun setupRecycler() {
+        val searchAdapter = SearchRestaurantAdapter(ArrayList()) {
+            it.restaurant?.let { restaurant ->
+                findNavController().navigate(
+                    SearchRestaurantNavigation.detailLayout(
+                        restaurant.id,
+                        restaurant.name
+                    )
+                )
+            }
+        }
+
+        dataBinding.recyclerResult.apply {
+            layoutManager = LinearLayoutManager(requireContext())
+            addItemDecoration(EqualSpacingItemDecoration(16, EqualSpacingItemDecoration.VERTICAL))
+            adapter = searchAdapter
+        }
+    }
+
+    private fun searchRestaurant() {
+        dataBinding.search.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String): Boolean {
+                viewModel.searchRestaurant(query)
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean = false
+        })
     }
 }

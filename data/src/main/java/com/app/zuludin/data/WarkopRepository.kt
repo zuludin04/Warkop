@@ -18,6 +18,7 @@ interface WarkopRepository {
 
     suspend fun loadCafeDetail(cafeId: String): LiveData<Resource<DetailCafeResponse>>
     suspend fun loadFeaturedRestaurant(): LiveData<Resource<List<RestaurantsItem>>>
+    suspend fun loadSearchRestaurant(query: String): LiveData<Resource<List<RestaurantsItem>>>
 }
 
 class WarkopRepositoryImpl(
@@ -63,7 +64,21 @@ class WarkopRepositoryImpl(
                 data == null || data.isEmpty()
 
             override fun createCallAsync(): Deferred<SearchCafeResponse> =
-                remote.loadFeaturedRestaurantAsycn()
+                remote.loadFeaturedRestaurantAsync()
+
+        }.build().asLiveData()
+    }
+
+    override suspend fun loadSearchRestaurant(query: String): LiveData<Resource<List<RestaurantsItem>>> {
+        return object : NetworkBoundResource<List<RestaurantsItem>, SearchCafeResponse>() {
+            override fun processResponse(response: SearchCafeResponse?): List<RestaurantsItem>? =
+                response?.restaurants
+
+            override fun shouldFetch(data: List<RestaurantsItem>?): Boolean =
+                data == null || data.isEmpty()
+
+            override fun createCallAsync(): Deferred<SearchCafeResponse> =
+                remote.loadSearchResult(query)
 
         }.build().asLiveData()
     }

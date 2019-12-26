@@ -19,4 +19,7 @@ interface ApiService {
 
     @GET("search")
     fun getFeaturedRestaurantAsync(@Query("sort") sort: String): Deferred<SearchCafeResponse>
+
+    @GET("search")
+    fun getSearchResultAsync(@Query("q") query: String): Deferred<SearchCafeResponse>
 }
