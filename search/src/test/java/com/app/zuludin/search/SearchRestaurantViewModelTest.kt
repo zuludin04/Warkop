@@ -1,4 +1,4 @@
-package com.app.zuludin.list
+package com.app.zuludin.search
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.MutableLiveData
@@ -24,38 +24,38 @@ import org.junit.runners.JUnit4
 @RunWith(JUnit4::class)
 @ExperimentalCoroutinesApi
 @SmallTest
-class CafeListViewModelTest {
+class SearchRestaurantViewModelTest {
     @Rule
     @JvmField
     val instantExecutorRule = InstantTaskExecutorRule()
 
-    private lateinit var getCafeByCityUseCase: GetCafeByCityUseCase
-    private lateinit var viewModel: CafeListViewModel
+    private lateinit var viewModel: SearchRestaurantViewModel
+    private lateinit var getSearchRestaurantUseCase: GetSearchRestaurantUseCase
     private val dispatchers = AppDispatchers(Dispatchers.Unconfined, Dispatchers.Unconfined)
 
-    private val cafes = listOf(
+    private val restaurants = listOf(
         RestaurantsItem(Restaurant(id = "1", name = "Cafe One")),
         RestaurantsItem(Restaurant(id = "2", name = "Cafe Two")),
         RestaurantsItem(Restaurant(id = "3", name = "Cafe Three"))
     )
 
     @Before
-    fun setupCafeListTest() {
-        getCafeByCityUseCase = mockk()
+    fun setupSearchRestaurantTest() {
+        getSearchRestaurantUseCase = mockk()
     }
 
     @Test
-    fun `load cafe list by city id`() {
+    fun `load restaurant result based on query`() {
         val observer = mockk<Observer<Resource<List<RestaurantsItem>>>>(relaxed = true)
-        val result = Resource.success(cafes)
+        val result = Resource.success(restaurants)
 
-        coEvery { getCafeByCityUseCase("74", "city", "8") } returns MutableLiveData<Resource<List<RestaurantsItem>>>().apply {
+        coEvery { getSearchRestaurantUseCase("cafe") } returns MutableLiveData<Resource<List<RestaurantsItem>>>().apply {
             value = result
         }
 
-        viewModel = CafeListViewModel(getCafeByCityUseCase, dispatchers)
-        viewModel.cafes.observeForever(observer)
-        viewModel.loadCafes("74", "city", "8")
+        viewModel = SearchRestaurantViewModel(getSearchRestaurantUseCase, dispatchers)
+        viewModel.restaurants.observeForever(observer)
+        viewModel.searchRestaurant("cafe")
 
         verify {
             observer.onChanged(result)
@@ -65,26 +65,23 @@ class CafeListViewModelTest {
     }
 
     @Test
-    fun `error when trying load restaurant list`() {
+    fun `trying search restaurant but resulting error result`() {
         val observer = mockk<Observer<Resource<List<RestaurantsItem>>>>(relaxed = true)
         val observerSnackBar = mockk<Observer<Event<String>>>(relaxed = true)
-        val observerErrorLayout = mockk<Observer<Boolean>>(relaxed = true)
         val result = Resource.error(Exception("Error"), null)
 
-        coEvery { getCafeByCityUseCase(any(), any(), any()) } returns MutableLiveData<Resource<List<RestaurantsItem>>>().apply {
+        coEvery { getSearchRestaurantUseCase(any()) } returns MutableLiveData<Resource<List<RestaurantsItem>>>().apply {
             value = result
         }
 
-        viewModel = CafeListViewModel(getCafeByCityUseCase, dispatchers)
-        viewModel.cafes.observeForever(observer)
+        viewModel = SearchRestaurantViewModel(getSearchRestaurantUseCase, dispatchers)
+        viewModel.restaurants.observeForever(observer)
         viewModel.errorMessage.observeForever(observerSnackBar)
-        viewModel.error.observeForever(observerErrorLayout)
-        viewModel.loadCafes("", "", "")
+        viewModel.searchRestaurant("")
 
         verify {
-            observer.onChanged(result) // get error result
-            observerErrorLayout.onChanged(viewModel.error.value) // show error layout so user can refresh the page
-            observerSnackBar.onChanged(viewModel.errorMessage.value) // show snackBar error message
+            observer.onChanged(result)
+            observerSnackBar.onChanged(viewModel.errorMessage.value)
         }
 
         confirmVerified(observer)
