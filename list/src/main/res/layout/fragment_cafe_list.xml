@@ -12,45 +12,70 @@
             type="com.app.zuludin.list.CafeListViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
         tools:context=".CafeListFragment">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_cafe"
+        <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:clipToPadding="false"
-            android:visibility="@{viewModel.error ? View.GONE : View.VISIBLE}"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:recyclerRestaurant="@{viewModel.cafes}" />
+            android:fitsSystemWindows="true"
+            android:theme="@style/AppTheme.AppBarOverlay">
 
-        <com.agrawalsuneet.squareloaderspack.loaders.WaveLoader
-            android:id="@+id/progress_bar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:showRefreshProgress="@{viewModel.loading}"
-            app:wave_animDuration="500"
-            app:wave_delayDuration="100"
-            app:wave_interpolator="@android:anim/linear_interpolator"
-            app:wave_isSingleColor="true"
-            app:wave_noOfDots="5"
-            app:wave_rectColor="#b52656"
-            app:wave_rectDistance="4dp"
-            app:wave_rectHeight="18dp"
-            app:wave_rectWidth="4dp" />
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="?attr/colorPrimary"
+                app:layout_scrollFlags="enterAlwaysCollapsed"
+                app:navigationIcon="@drawable/ic_back_button"
+                app:titleTextColor="?attr/colorAccent" />
 
-        <include
-            android:id="@+id/error_timeout_layout"
-            layout="@layout/error_timeout_layout"
-            android:visibility="@{viewModel.error ? View.VISIBLE : View.GONE}" />
+        </com.google.android.material.appbar.AppBarLayout>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_cafe"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clipToPadding="false"
+                android:visibility="@{viewModel.error ? View.GONE : View.VISIBLE}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:recyclerRestaurant="@{viewModel.cafes}" />
+
+            <com.agrawalsuneet.squareloaderspack.loaders.WaveLoader
+                android:id="@+id/progress_bar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:showRefreshProgress="@{viewModel.loading}"
+                app:wave_animDuration="500"
+                app:wave_delayDuration="100"
+                app:wave_interpolator="@android:anim/linear_interpolator"
+                app:wave_isSingleColor="true"
+                app:wave_noOfDots="5"
+                app:wave_rectColor="#b52656"
+                app:wave_rectDistance="4dp"
+                app:wave_rectHeight="18dp"
+                app:wave_rectWidth="4dp" />
+
+            <include
+                android:id="@+id/error_timeout_layout"
+                layout="@layout/error_timeout_layout"
+                android:visibility="@{viewModel.error ? View.VISIBLE : View.GONE}" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </layout>

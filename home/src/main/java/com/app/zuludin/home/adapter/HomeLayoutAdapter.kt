@@ -18,8 +18,10 @@ import kotlinx.android.synthetic.main.item_recycler.view.*
 class HomeLayoutAdapter(
     private val items: MutableList<Any>,
     private val listener: (city: City?, category: Categories?, restaurant: RestaurantsItem?) -> Unit
-) :
-    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+
+    private val recyclerPool = RecyclerView.RecycledViewPool()
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
             ITEM_HEADER -> HeaderViewHolder(
@@ -46,6 +48,7 @@ class HomeLayoutAdapter(
             ITEM_MORE -> {
                 val viewHolder = holder as MoreViewHolder
                 viewHolder.bind(items[position] as MoreData, listener)
+                viewHolder.itemView.recycler_more.setRecycledViewPool(recyclerPool)
             }
             else -> throw IllegalArgumentException("Undefined itemViewType")
         }

@@ -6,15 +6,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.app.zuludin.common.EqualSpacingItemDecoration
 import com.app.zuludin.common.base.BaseFragment
 import com.app.zuludin.common.base.BaseViewModel
-import com.app.zuludin.common.EqualSpacingItemDecoration
 import com.app.zuludin.search.databinding.FragmentSearchBinding
 import com.app.zuludin.search.navigation.SearchRestaurantNavigation
 import com.app.zuludin.search.view.SearchRestaurantAdapter
-import kotlinx.android.synthetic.main.fragment_search.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SearchRestaurantFragment : BaseFragment() {
@@ -31,6 +31,8 @@ class SearchRestaurantFragment : BaseFragment() {
         dataBinding.viewModel = viewModel
         dataBinding.lifecycleOwner = viewLifecycleOwner
 
+        dataBinding.toolbar.setNavigationOnClickListener { it.findNavController().popBackStack() }
+
         return dataBinding.root
     }
 
@@ -38,8 +40,6 @@ class SearchRestaurantFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         dataBinding.search.setIconifiedByDefault(false)
         dataBinding.search.queryHint = "Search"
-
-        back_button.setOnClickListener { findNavController().popBackStack() }
 
         setupRecycler()
         searchRestaurant()

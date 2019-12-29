@@ -2,6 +2,7 @@ package com.app.zuludin.home
 
 import android.os.Bundle
 import android.view.*
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -38,6 +39,8 @@ class HomeFragment : BaseFragment() {
         dataBinding.viewModel = viewModel
         dataBinding.errorLayout.viewModel = viewModel
         dataBinding.lifecycleOwner = viewLifecycleOwner
+
+        (activity as AppCompatActivity).setSupportActionBar(dataBinding.toolbar)
 
         return dataBinding.root
     }

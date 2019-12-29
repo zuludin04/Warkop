@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -39,6 +40,10 @@ class CafeListFragment : BaseFragment() {
         dataBinding.viewModel = viewModel
         dataBinding.errorTimeoutLayout.viewModel = viewModel
         dataBinding.lifecycleOwner = viewLifecycleOwner
+
+        dataBinding.toolbar.setNavigationOnClickListener { view ->
+            view.findNavController().popBackStack()
+        }
 
         return dataBinding.root
     }
