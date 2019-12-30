@@ -29,6 +29,8 @@ class CafeDetailViewModelTest {
     val instantExecutorRule = InstantTaskExecutorRule()
 
     private lateinit var getDetailCafeUseCase: GetDetailCafeUseCase
+    private lateinit var getRestaurantReviewUseCase: GetRestaurantReviewUseCase
+
     private lateinit var viewModel: CafeDetailViewModel
     private val dispatchers = AppDispatchers(Dispatchers.Unconfined, Dispatchers.Unconfined)
 
@@ -37,7 +39,8 @@ class CafeDetailViewModelTest {
     @Before
     fun setupDetailCafeTest() {
         getDetailCafeUseCase = mockk()
-        viewModel = CafeDetailViewModel(getDetailCafeUseCase, dispatchers)
+        getRestaurantReviewUseCase = mockk()
+        viewModel = CafeDetailViewModel(getDetailCafeUseCase, getRestaurantReviewUseCase, dispatchers)
     }
 
     @Test

@@ -2,6 +2,7 @@ package com.app.zuludin.data.source.api
 
 import com.app.zuludin.data.model.SearchCafeResponse
 import com.app.zuludin.data.model.detail.DetailCafeResponse
+import com.app.zuludin.data.model.review.ReviewResponse
 import kotlinx.coroutines.Deferred
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -22,4 +23,7 @@ interface ApiService {
 
     @GET("search")
     fun getSearchResultAsync(@Query("q") query: String): Deferred<SearchCafeResponse>
+
+    @GET("reviews")
+    fun getRestaurantReviewsAsync(@Query("res_id") resId: Int): Deferred<ReviewResponse>
 }

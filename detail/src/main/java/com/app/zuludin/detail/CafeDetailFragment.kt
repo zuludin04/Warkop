@@ -15,6 +15,7 @@ import com.app.zuludin.common.base.BaseFragment
 import com.app.zuludin.common.base.BaseViewModel
 import com.app.zuludin.detail.adapter.CafeSlideAdapter
 import com.app.zuludin.detail.adapter.FacilityAdapter
+import com.app.zuludin.detail.adapter.ReviewAdapter
 import com.app.zuludin.detail.databinding.FragmentCafeDetailBinding
 import kotlinx.android.synthetic.main.fragment_cafe_detail.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -49,11 +50,17 @@ class CafeDetailFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         val cafe = args.detailCafe
         val facilityAdapter = FacilityAdapter(ArrayList())
+        val reviewAdapter = ReviewAdapter(ArrayList())
 
         dataBinding.recyclerMore.apply {
             layoutManager =
                 LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
             adapter = facilityAdapter
+        }
+
+        dataBinding.recyclerReview.apply {
+            layoutManager = LinearLayoutManager(requireContext())
+            adapter = reviewAdapter
         }
 
         viewModel.cafe.observe(this, Observer {

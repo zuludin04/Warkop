@@ -205,6 +205,34 @@
                     app:layout_constraintTop_toBottomOf="@+id/more" />
 
                 <TextView
+                    android:id="@+id/review"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="12dp"
+                    android:gravity="center"
+                    android:text="@string/review"
+                    android:textColor="@android:color/black"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    android:visibility="@{viewModel.error ? View.GONE : View.VISIBLE}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/recycler_more" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_review"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="4dp"
+                    android:clipToPadding="false"
+                    android:visibility="@{viewModel.error ? View.GONE : View.VISIBLE}"
+                    app:layout_constraintTop_toBottomOf="@+id/review"
+                    app:restaurantReviews="@{viewModel.reviews}" />
+
+                <TextView
                     android:id="@+id/detail_cafe_map"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

@@ -4,6 +4,8 @@ import androidx.lifecycle.LiveData
 import com.app.zuludin.data.model.RestaurantsItem
 import com.app.zuludin.data.model.SearchCafeResponse
 import com.app.zuludin.data.model.detail.DetailCafeResponse
+import com.app.zuludin.data.model.review.ReviewResponse
+import com.app.zuludin.data.model.review.UserReviewsItem
 import com.app.zuludin.data.source.WarkopRemoteSource
 import com.app.zuludin.data.utils.NetworkBoundResource
 import com.app.zuludin.data.utils.Resource
@@ -19,6 +21,7 @@ interface WarkopRepository {
     suspend fun loadCafeDetail(cafeId: String): LiveData<Resource<DetailCafeResponse>>
     suspend fun loadFeaturedRestaurant(): LiveData<Resource<List<RestaurantsItem>>>
     suspend fun loadSearchRestaurant(query: String): LiveData<Resource<List<RestaurantsItem>>>
+    suspend fun loadRestaurantReview(resId: String): LiveData<Resource<List<UserReviewsItem>>>
 }
 
 class WarkopRepositoryImpl(
@@ -78,7 +81,21 @@ class WarkopRepositoryImpl(
                 data == null || data.isEmpty()
 
             override fun createCallAsync(): Deferred<SearchCafeResponse> =
-                remote.loadSearchResult(query)
+                remote.loadSearchResultAsync(query)
+
+        }.build().asLiveData()
+    }
+
+    override suspend fun loadRestaurantReview(resId: String): LiveData<Resource<List<UserReviewsItem>>> {
+        return object : NetworkBoundResource<List<UserReviewsItem>, ReviewResponse>() {
+            override fun processResponse(response: ReviewResponse?): List<UserReviewsItem>? =
+                response?.userReviews
+
+            override fun shouldFetch(data: List<UserReviewsItem>?): Boolean =
+                data == null || data.isEmpty()
+
+            override fun createCallAsync(): Deferred<ReviewResponse> =
+                remote.loadRestaurantReview(resId.toInt())
 
         }.build().asLiveData()
     }

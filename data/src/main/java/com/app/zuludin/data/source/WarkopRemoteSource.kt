@@ -10,5 +10,7 @@ class WarkopRemoteSource(private val service: ApiService) {
 
     fun loadFeaturedRestaurantAsync() = service.getFeaturedRestaurantAsync("rating")
 
-    fun loadSearchResult(q: String) = service.getSearchResultAsync(q)
+    fun loadSearchResultAsync(q: String) = service.getSearchResultAsync(q)
+
+    fun loadRestaurantReview(resId: Int) = service.getRestaurantReviewsAsync(resId)
 }

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_marginTop="4dp"
+    android:layout_marginBottom="4dp"
+    app:cardCornerRadius="3dp"
+    app:cardElevation="2dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp">
+
+        <com.github.florent37.shapeofview.shapes.CircleView
+            android:id="@+id/photo"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/review_image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@null"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_error" />
+
+        </com.github.florent37.shapeofview.shapes.CircleView>
+
+        <TextView
+            android:id="@+id/review_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            tools:text="Zulfikar Mauludin"
+            android:textColor="@android:color/black"
+            android:textSize="15sp"
+            app:layout_constraintStart_toEndOf="@+id/photo"
+            app:layout_constraintTop_toTopOf="@+id/photo" />
+
+        <TextView
+            android:id="@+id/review_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            tools:text="30 Dec 2019"
+            android:textSize="13sp"
+            app:layout_constraintBottom_toBottomOf="@+id/photo"
+            app:layout_constraintStart_toEndOf="@+id/photo" />
+
+        <com.github.florent37.shapeofview.shapes.RoundRectView
+            android:id="@+id/rating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@+id/photo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/photo"
+            app:shape_roundRect_bottomLeftRadius="5dp"
+            app:shape_roundRect_bottomRightRadius="5dp"
+            app:shape_roundRect_topLeftRadius="5dp"
+            app:shape_roundRect_topRightRadius="5dp">
+
+            <TextView
+                android:id="@+id/review_rating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="4dp"
+                tools:text="4.8"
+                android:textColor="@android:color/white"
+                app:layout_constraintBottom_toBottomOf="@+id/review_image"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/review_image" />
+
+        </com.github.florent37.shapeofview.shapes.RoundRectView>
+
+        <View
+            android:id="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="8dp"
+            android:alpha=".3"
+            android:background="@android:color/darker_gray"
+            app:layout_constraintTop_toBottomOf="@+id/photo" />
+
+        <TextView
+            android:id="@+id/review_comment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:ellipsize="end"
+            android:textColor="@android:color/black"
+            app:layout_constraintTop_toBottomOf="@+id/divider" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>
