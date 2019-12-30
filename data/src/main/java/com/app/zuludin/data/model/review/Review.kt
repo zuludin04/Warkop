@@ -1,5 +1,6 @@
 package com.app.zuludin.data.model.review
 
+import com.app.zuludin.data.model.User
 import com.google.gson.annotations.SerializedName
 
 data class Review(

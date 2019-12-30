@@ -4,17 +4,6 @@ import com.google.gson.annotations.SerializedName
 
 data class Restaurant(
 
-	@field:SerializedName("include_bogo_offers")
-	val includeBogoOffers: Boolean? = null,
-
-	@field:SerializedName("has_online_delivery")
-	val hasOnlineDelivery: Int? = null,
-
-	@field:SerializedName("establishment_types")
-	val establishmentTypes: List<Any>? = null,
-
-	@field:SerializedName("has_table_booking")
-	val hasTableBooking: Int? = null,
 
 	@field:SerializedName("thumb")
 	val thumb: String? = null,
@@ -28,20 +17,8 @@ data class Restaurant(
 	@field:SerializedName("price_range")
 	val priceRange: Int? = null,
 
-	@field:SerializedName("switch_to_order_menu")
-	val switchToOrderMenu: Int? = null,
-
 	@field:SerializedName("photos")
 	val photos: List<PhotosItem>? = null,
-
-	@field:SerializedName("R")
-	val R: Ray? = null,
-
-	@field:SerializedName("all_reviews_count")
-	val allReviewsCount: Int? = null,
-
-	@field:SerializedName("is_table_reservation_supported")
-	val isTableReservationSupported: Int? = null,
 
 	@field:SerializedName("timings")
 	val timings: String? = null,
@@ -49,35 +26,14 @@ data class Restaurant(
 	@field:SerializedName("currency")
 	val currency: String? = null,
 
-	@field:SerializedName("opentable_support")
-	val opentableSupport: Int? = null,
-
 	@field:SerializedName("id")
 	val id: String? = null,
-
-	@field:SerializedName("all_reviews")
-	val allReviews: AllReviews? = null,
 
 	@field:SerializedName("user_rating")
 	val userRating: UserRating? = null,
 
-	@field:SerializedName("offers")
-	val offers: List<Any>? = null,
-
 	@field:SerializedName("apikey")
 	val apikey: String? = null,
-
-	@field:SerializedName("is_delivering_now")
-	val isDeliveringNow: Int? = null,
-
-	@field:SerializedName("deeplink")
-	val deeplink: String? = null,
-
-	@field:SerializedName("is_zomato_book_res")
-	val isZomatoBookRes: Int? = null,
-
-	@field:SerializedName("establishment")
-	val establishment: List<String>? = null,
 
 	@field:SerializedName("featured_image")
 	val featuredImage: String? = null,

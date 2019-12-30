@@ -1,5 +1,6 @@
 package com.app.zuludin.data.model.detail
 
+import com.app.zuludin.data.model.*
 import com.google.gson.annotations.SerializedName
 
 data class DetailCafeResponse(
