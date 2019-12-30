@@ -31,7 +31,7 @@
                 android:background="?attr/colorPrimary"
                 app:layout_scrollFlags="enterAlwaysCollapsed"
                 app:navigationIcon="@drawable/ic_back_button"
-                app:titleTextColor="?attr/colorAccent" />
+                app:titleTextColor="@android:color/black" />
 
         </com.google.android.material.appbar.AppBarLayout>
 

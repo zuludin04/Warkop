@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
@@ -40,6 +41,11 @@ class CafeListFragment : BaseFragment() {
         dataBinding.viewModel = viewModel
         dataBinding.errorTimeoutLayout.viewModel = viewModel
         dataBinding.lifecycleOwner = viewLifecycleOwner
+
+        (activity as AppCompatActivity).apply {
+            setSupportActionBar(dataBinding.toolbar)
+            supportActionBar?.title = args.pageTitle
+        }
 
         dataBinding.toolbar.setNavigationOnClickListener { view ->
             view.findNavController().popBackStack()
