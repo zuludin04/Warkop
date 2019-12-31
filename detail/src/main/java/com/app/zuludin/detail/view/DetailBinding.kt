@@ -1,5 +1,6 @@
 package com.app.zuludin.detail.view
 
+import android.graphics.Color
 import android.view.View
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
@@ -36,6 +37,14 @@ object DetailBinding {
             with(recyclerView.adapter as ReviewAdapter) {
                 addItems(it)
             }
+        }
+    }
+
+    @BindingAdapter("app:ratingBgColor")
+    @JvmStatic
+    fun setRatingBgColor(textView: TextView, detail: DetailCafeResponse?) {
+        detail?.userRating?.let {
+            textView.setBackgroundColor(Color.parseColor("#${it.ratingColor}"))
         }
     }
 }

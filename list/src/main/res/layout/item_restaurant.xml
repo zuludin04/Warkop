@@ -36,39 +36,44 @@
 
         <TextView
             android:id="@+id/cafe_name"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginBottom="4dp"
-            android:gravity="center"
+            android:ellipsize="end"
+            android:maxLines="1"
             android:text="@{cafe.name}"
             android:textColor="@android:color/black"
             android:textSize="16sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/cafe_cuisine"
+            app:layout_constraintEnd_toStartOf="@+id/cafe_rating"
             app:layout_constraintStart_toEndOf="@+id/container"
+            app:layout_constraintTop_toTopOf="@+id/container"
             tools:text="Name" />
 
         <TextView
             android:id="@+id/cafe_cuisine"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
+            android:ellipsize="end"
+            android:maxLines="1"
             android:text="@{cafe.cuisines}"
             android:textSize="15sp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/container"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cafe_name"
             tools:text="Dessert" />
 
         <TextView
             android:id="@+id/cafe_location"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="4dp"
             android:text="@{String.format(@string/cafe_location, cafe.location.locality, cafe.location.city)}"
             android:textSize="13sp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/container"
             app:layout_constraintTop_toBottomOf="@+id/cafe_cuisine"
             tools:text="Tendean, Jakarta" />
