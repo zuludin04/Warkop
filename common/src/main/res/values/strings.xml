@@ -1,8 +1,23 @@
 <resources>
-    <string name="app_name">common</string>
+    <string name="app_name">Warkop</string>
     <string name="cafe_location">%s, %s</string>
 
     <string name="sorry">We\'re Sorry</string>
     <string name="something_wrong">There is something wrong. \n Check your connection and refresh the page</string>
     <string name="try_again">Try Again</string>
+
+    <string name="time">Time</string>
+    <string name="cuisine">Cuisine</string>
+    <string name="currency">Currency</string>
+    <string name="average_cost">Average Cost</string>
+    <string name="facility">Facility</string>
+    <string name="map">Map</string>
+    <string name="menu">Menu</string>
+    <string name="phone">Phone</string>
+    <string name="photos">Photos</string>
+    <string name="more_info">More Info</string>
+    <string name="cost">%s %s</string>
+    <string name="review">Reviews</string>
+
+    <string name="search">Search</string>
 </resources>
