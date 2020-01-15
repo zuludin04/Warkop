@@ -1,3 +1,2 @@
 # Warkop
-#
-# Find the best restaurant to hang out
+Find the best restaurant to hang out
